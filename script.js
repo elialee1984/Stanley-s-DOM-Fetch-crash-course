@@ -62,3 +62,60 @@ const createUsersList = (arrOfObj) => {
 
 const userList = createUsersList(users);
 root.appendChild(userList);
+
+/*
+***********************************************************************************
+********************************* POKEMON *****************************************
+**************************** gotta fetch 'em all **********************************
+***********************************************************************************
+*/
+// 10.
+const ditto = async () => {
+    try {
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+        const data = await response.json();
+
+        console.log(data);
+
+        displayDitto(data) // display Ditto (incl. sprites and abilities) with the fetched data
+    } catch (error) {
+        console.error("Error fetching Ditto data", error);
+    }
+}
+
+// 11.
+const displayDitto = dittoData => {
+    // header with the name of the pkmn (here: Ditto)
+    const dittoDiv = document.createElement("div");
+    const dittoName = document.createElement("h2");
+    dittoName.textContent = dittoData.name;
+
+    // image of pkmn
+    const dittoImage = document.createElement("img");
+    dittoImage.src = dittoData.sprites.front_default;
+    dittoImage.alt = "Ditto";
+
+    // just a header saying "abilities"
+    const abilitiesHeading = document.createElement("h3");
+    abilitiesHeading.textContent = "Abilities";
+
+    // unordered list of abilities
+    const abilitiesList = document.createElement("ul");
+    // function enables possibility to add more abilities in the future
+    dittoData.abilities.forEach(ability => {
+        const abilityItem = document.createElement("li");
+        abilityItem.textContent = ability.ability.name;
+        abilitiesList.appendChild(abilityItem);
+    });
+
+    // now that everything's created, it has to be appended to the div...
+    dittoDiv.appendChild(dittoName);
+    dittoDiv.appendChild(dittoImage);
+    dittoDiv.appendChild(abilitiesHeading);
+    dittoDiv.appendChild(abilitiesList);
+
+    // ... which in turn has to be attended to the root-div
+    root.appendChild(dittoDiv)
+}
+
+ditto()
