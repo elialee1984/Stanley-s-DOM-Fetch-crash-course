@@ -85,8 +85,9 @@ const ditto = async () => {
 
 // 11.
 const displayDitto = dittoData => {
-    // header with the name of the pkmn (here: Ditto)
     const dittoDiv = document.createElement("div");
+
+    // header with the name of the pkmn (here: Ditto)
     const dittoName = document.createElement("h2");
     dittoName.textContent = dittoData.name;
 
@@ -114,7 +115,7 @@ const displayDitto = dittoData => {
     dittoDiv.appendChild(abilitiesHeading);
     dittoDiv.appendChild(abilitiesList);
 
-    // ... which in turn has to be attended to the root-div
+    // ... which in turn has to be appended to the root-div
     root.appendChild(dittoDiv)
 }
 
